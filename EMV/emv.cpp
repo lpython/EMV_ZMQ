@@ -192,7 +192,7 @@ void EMV::ReplyFinished(QNetworkReply* response)
     /*emit*/ LoadNewQuakeML(strResponse);
 }
 
-void EMV::on_action_Test_Hypo_Message_triggered()
-{
-    on_HypoMessageReceived();
-}
+//void EMV::on_action_Test_Hypo_Message_triggered()
+//{
+//    on_HypoMessageReceived();
+//}

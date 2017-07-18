@@ -47,13 +47,20 @@
     <layout class="QHBoxLayout" name="horizontalLayout_7">
      <item>
       <widget class="QPushButton" name="pushButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="text">
         <string>EarthWorm Config File : </string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="EarthWormImportFile"/>
+      <widget class="QLineEdit" name="EarthWormImportFile">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

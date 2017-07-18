@@ -20,7 +20,7 @@ EarthWormSettings::EarthWormSettings(QWidget *parent) :
 
     ui->ZoomLevel->setText(qsettings.value("EW/ZoomOnResponse", "").toString());
 
-    ui->EarthWormImportFile->setText(qsettings.value("EW/ImportFile", "").toString());
+//    ui->EarthWormImportFile->setText(qsettings.value("EW/ImportFile", "").toString());
 }
 
 EarthWormSettings::~EarthWormSettings()
@@ -65,11 +65,11 @@ void EarthWormSettings::closeEvent(QCloseEvent *)
     else
         qsettings.setValue("EW/ZoomOnResponse", ZoomLevel);
 
-    QString ImportFile = ui->EarthWormImportFile->text().trimmed();
-    if (ImportFile.isEmpty())
-        qsettings.remove("EW/ImportFile");
-    else
-        qsettings.setValue("EW/ImportFile", ImportFile);
+//    QString ImportFile = ui->EarthWormImportFile->text().trimmed();
+//    if (ImportFile.isEmpty())
+//        qsettings.remove("EW/ImportFile");
+//    else
+//        qsettings.setValue("EW/ImportFile", ImportFile);
 }
 
 void EarthWormSettings::on_pushButton_clicked()

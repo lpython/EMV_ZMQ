@@ -48,18 +48,22 @@ void EMV::on_tableWidget_itemSelectionChanged()
 }
 
 //Test function, ugly
-void EMV::on_HypoMessageReceived()
+void EMV::on_HypoMessageReceived(QString message)
 {
     events.clear();
 
     #ifdef Q_DEBUG
-    QMessageBox::information(this, "Hypo Message", "Message Received, starting FDSN request.");
+    QMessageBox::information(this, "Hypo Message",
+        QString("Message Received, starting FDSN request.\n") +
+        message.right(32));
     #endif
 
     QUrl url {settings.value("EW/MoleURL", "http://love.isti.com:8089/mole").toString()};
     QString query {"minmag=0&limit=200&orderby=mag&"};
 
-    int TimeValue = settings.value("EW/TimeAmount", 60).toInt();
+    int TimeValue = settings.value("EW/TimeAmount", 0).toInt();
+    if (TimeValue < 1) TimeValue = 60;
+
     QString TimeUnit = settings.value("EW/TimeUnit", "Minutes").toString();
 
     if (TimeUnit == "Hours") TimeValue *= 60;
@@ -72,9 +76,6 @@ void EMV::on_HypoMessageReceived()
 
     dateTimeStart = dateTimeStart.toUTC();
     dateTimeEnd = dateTimeEnd.toUTC();
-
-//    QString startTime = dateTimeStart.toString("yyyy-MM-dd") + "T" + "00:00:00" /*dateTimeStart.toString("hh:mm:ss")*/;
-//    QString endTime = dateTimeEnd.toString("yyyy-MM-dd") + "T" + "23:59:59" /* dateTimeEnd.toString("hh:mm:ss")*/;
 
     QString startTime = dateTimeStart.toString("yyyy-MM-dd") + "T" + dateTimeStart.toString("hh:mm:ss");
     QString endTime = dateTimeEnd.toString("yyyy-MM-dd") + "T" + dateTimeEnd.toString("hh:mm:ss");
@@ -146,7 +147,10 @@ void EMV::on_action_Exit_triggered()
 
 void EMV::on_action_EW_Initialize_triggered()
 {
-    #ifndef NO_EARTHWORM
-    //EWC::StartImportGeneric();
-    #endif
+    if (!HypoWorker)
+    {
+        HypoWorker = new EarthWormZMQWorker(this);
+        connect(HypoWorker, &EarthWormZMQWorker::ReceivedHypoMessage, this, &EMV::on_HypoMessageReceived);
+        HypoWorker->start();
+    }
 }

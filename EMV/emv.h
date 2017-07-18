@@ -25,6 +25,8 @@
 #include <marble/MarbleModel.h>
 #include <marble/GeoDataTreeModel.h>
 
+#include "earthwormzmqworker.h"
+
 #include "QuakeML/quakemlreader.h"
 #include "QuakeML/quakemlevent.h"
 
@@ -56,7 +58,7 @@ signals:
     void LatLongChanged(qreal latitude, qreal longitude);   // For sending coords to FDSNRequest Dialog
 
 public slots:
-    void on_HypoMessageReceived();
+    void on_HypoMessageReceived(QString message);
 
 private slots:
     void on_Start();        //Operations that cannot/should not happen in constructor. Runs 0.5 sec after constructor
@@ -84,7 +86,7 @@ private slots:
 
     void on_action_Settings_triggered();
 
-    void on_action_Test_Hypo_Message_triggered();
+//    void on_action_Test_Hypo_Message_triggered(QString message);
 
 private:
     void ConnectSlots();
@@ -101,8 +103,10 @@ private:
     QLabel* LongitudeNameLabel { new QLabel("Longitude : ", this) };
     QLabel* LongitudeLabel { new QLabel(this) };
 
+    //Long term dialogs
     QPointer<FDSNRequestDialog> fdsnDialog;
 
+    // Marble
     QScopedPointer<EventLayer> eventLayer;
     QScopedPointer<ArchPaintLayer> archLayer;
     QScopedPointer<Marble::GeoDataDocument> geoDoc {new Marble::GeoDataDocument};
@@ -110,9 +114,11 @@ private:
     //For test net code
     QNetworkAccessManager net;
 
+    //Containers
     QVector<QuakeMLEvent> events;
-
     QVector<EarthWormSite> stations;
+
+    QPointer<EarthWormZMQWorker> HypoWorker;
 
     QSettings settings;
 

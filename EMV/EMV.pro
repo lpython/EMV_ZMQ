@@ -34,7 +34,8 @@ SOURCES += main.cpp\
     Widgets/quakemltable.cpp \
     emv_slots.cpp \
     Dialogs/earthwormsettings.cpp \
-    EWC/earthwormsite.cpp
+    EWC/earthwormsite.cpp \
+    earthwormzmqworker.cpp
 
 HEADERS  += emv.h \
     mapwidget.h \
@@ -47,24 +48,25 @@ HEADERS  += emv.h \
     Dialogs/connectdialog.h \
     Widgets/quakemltable.h \
     Dialogs/earthwormsettings.h \
-    EWC/earthwormsite.h
+    EWC/earthwormsite.h \
+    earthwormzmqworker.h
 
 FORMS    += emv.ui \
     Dialogs/fdsnrequestdialog.ui \
     Dialogs/connectdialog.ui \
     Dialogs/earthwormsettings.ui
 
+RESOURCES += \
+    Embedded/emvresources.qrc
+
+
 macx {
     LIBS += -L/Users/alexm/lib/ -lmarblewidget-qt5.0.27.1
 }
 
 unix:!macx {
-    LIBS +=   -L/usr/local/lib -lmarblewidget-qt5
+    LIBS +=   -L/usr/local/lib -lmarblewidget-qt5 -lzmq
 }
-
-RESOURCES += \
-    Embedded/emvresources.qrc
-
 
 # ---- EarthWorm Injection ----
 

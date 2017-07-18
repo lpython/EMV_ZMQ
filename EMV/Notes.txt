@@ -8,9 +8,9 @@ EMV
 ├── build-EMV-Desktop-Debug
 └── EMV
     ├── Dialogs
-    ├── EarthWorm        - exact SVN repo clone of EW, directory structure intect. HOWEVER, one file (import_generic.c) is under git control also
+    ├── // Gone - EarthWorm        - exact SVN repo clone of EW, directory structure intect. HOWEVER, one file (import_generic.c) is under git control also
     ├── Embedded         - Files that are packaged into executable, by Qt5 resource file
-    ├── EWC              - Source files for calling into/out of earthworm
+    ├── EWC              - Source files for calling into/out of earthworm. Also for read earthworm format files.
     ├── MarbleLayers     - Classes that add layers to map widget
     ├── QuakeML
     └── Widgets
