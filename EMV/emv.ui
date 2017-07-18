@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EMV</class>
+ <widget class="QMainWindow" name="EMV">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>547</width>
+    <height>505</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>EMV</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QSplitter" name="splitter">
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="childrenCollapsible">
+       <bool>false</bool>
+      </property>
+      <widget class="QuakeMLTableWidget" name="tableWidget">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>100</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="MapWidget" name="map" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>400</width>
+         <height>400</height>
+        </size>
+       </property>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>547</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuTests">
+    <property name="title">
+     <string>Connect</string>
+    </property>
+    <addaction name="action_Open_FDSN_Request_Dialog"/>
+    <addaction name="separator"/>
+    <addaction name="action_Save_XML"/>
+    <addaction name="action_Load_XML"/>
+    <addaction name="separator"/>
+    <addaction name="action_Exit"/>
+   </widget>
+   <widget class="QMenu" name="menuEarthWorm">
+    <property name="title">
+     <string>EarthWorm</string>
+    </property>
+    <addaction name="action_EW_Initialize"/>
+    <addaction name="separator"/>
+    <addaction name="action_Settings"/>
+   </widget>
+   <widget class="QMenu" name="menuTests_2">
+    <property name="title">
+     <string>Tests</string>
+    </property>
+    <addaction name="action_IRIS_Test"/>
+    <addaction name="action_ISTI_Test"/>
+    <addaction name="action_Test_Hypo_Message"/>
+   </widget>
+   <addaction name="menuTests"/>
+   <addaction name="menuEarthWorm"/>
+   <addaction name="menuTests_2"/>
+  </widget>
+  <widget class="QStatusBar" name="StatusBar"/>
+  <action name="action_IRIS_Test">
+   <property name="text">
+    <string>Test 1 - IRIS</string>
+   </property>
+   <property name="toolTip">
+    <string>IRIS Test</string>
+   </property>
+  </action>
+  <action name="action_ISTI_Test">
+   <property name="text">
+    <string>Test 2 - ISTI mole</string>
+   </property>
+  </action>
+  <action name="action_Save_XML">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="Embedded/emvresources.qrc">
+     <normaloff>:/Icons/tag.png</normaloff>:/Icons/tag.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save XML</string>
+   </property>
+  </action>
+  <action name="action_Load_XML">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/graphics/icons/tag.png</normaloff>:/graphics/icons/tag.png</iconset>
+   </property>
+   <property name="text">
+    <string>Load XML</string>
+   </property>
+  </action>
+  <action name="action_Open_FDSN_Request_Dialog">
+   <property name="icon">
+    <iconset resource="Embedded/emvresources.qrc">
+     <normaloff>:/Icons/database.png</normaloff>:/Icons/database.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open FDSN Request Dialong</string>
+   </property>
+  </action>
+  <action name="action_Exit">
+   <property name="icon">
+    <iconset resource="Embedded/emvresources.qrc">
+     <normaloff>:/Icons/close.png</normaloff>:/Icons/close.png</iconset>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="action_EW_Initialize">
+   <property name="text">
+    <string>EW Initialize</string>
+   </property>
+   <property name="toolTip">
+    <string>EW Initialize</string>
+   </property>
+  </action>
+  <action name="action_Settings">
+   <property name="text">
+    <string>Settings</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+M</string>
+   </property>
+  </action>
+  <action name="action_Test_Hypo_Message">
+   <property name="text">
+    <string>Test Hypo Message</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>MapWidget</class>
+   <extends>QWidget</extends>
+   <header>mapwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QuakeMLTableWidget</class>
+   <extends>QTableWidget</extends>
+   <header>quakemltable.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="Embedded/emvresources.qrc"/>
+ </resources>
+ <connections/>
+</ui>
