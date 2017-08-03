@@ -19,7 +19,17 @@ INCLUDEPATH += Widgets/
 
 macx {
     DEFINES += NO_EARTHWORM
+
+    #QMAKE_RPATHDIR += @executable_path/../Frameworks
+    #QMAKE_LFLAGS += -rpath @excutable_path/../Frameworks
+
     INCLUDEPATH += /Users/alexm/lib/include/
+    INCLUDEPATH += /Users/alexm/local/Library/Frameworks/libzmq.framework/Versions/4.2.1/Headers
+
+
+    LIBS += -L/Users/alexm/lib/ -lmarblewidget-qt5.0.27.1
+    LIBS += -L/Users/alexm/local/lib/ -lzmq-static
+ #   LIBS += -L/Users/alexm/local/Library/Frameworks/libzmq.framework/Versions -lzmq-static.a
 }
 
 SOURCES += main.cpp\
@@ -58,11 +68,6 @@ FORMS    += emv.ui \
 
 RESOURCES += \
     Embedded/emvresources.qrc
-
-
-macx {
-    LIBS += -L/Users/alexm/lib/ -lmarblewidget-qt5.0.27.1
-}
 
 unix:!macx {
     LIBS +=   -L/usr/local/lib -lmarblewidget-qt5 -lzmq

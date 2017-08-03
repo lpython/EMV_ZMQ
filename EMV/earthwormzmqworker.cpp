@@ -4,8 +4,8 @@ void EarthWormZMQWorker::run()
 {
     QSettings qsettings;
 
-    QString IP = qsettings.value("EW/IP", "").toString();
-    QString Port = qsettings.value("EW/Port", "").toString();
+    QString IP = qsettings.value("EW/IP", "Error").toString();
+    QString Port = qsettings.value("EW/Port", "Error").toString();
     QString URL = QString("tcp://") + IP + QString(":") + Port;
 
     qDebug() << URL << endl;
@@ -13,7 +13,14 @@ void EarthWormZMQWorker::run()
     context = new zmq::context_t(1);
     subscriber = new zmq::socket_t(*context, ZMQ_SUB);
 
-    subscriber->connect(URL.toLatin1());
+    try {
+        qDebug() << URL.toLatin1().data() << endl;
+        subscriber->connect(URL.toLatin1().data());
+    }
+    catch (const zmq::error_t& error) {
+        QString errorMessage(error.what());
+        qDebug() << errorMessage << endl;
+    }
 
     //  Subscribe to export zmq
     const char *filter = "EW_ZMQ:";
